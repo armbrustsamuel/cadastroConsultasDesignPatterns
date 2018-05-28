@@ -10,23 +10,26 @@ using namespace std;
 class Consulta
 {
 private:
+    static Consulta * instance;
     string consultorio;
     string exame;
-    Paciente paciente;
-    Medico medico;
+    Paciente * paciente;
+    Medico * medico;
+    Consulta(){};
 
 public:
-    Consulta(){};
-    Consulta(string place, string exam, Paciente patient, Medico doctor);
+//    Consulta(string place, string exam, Paciente *patient, Medico *doctor);
 
     string getConsultorio() const;
     void setConsultorio(const string &value);
     string getExame() const;
     void setExame(const string &value);
-    Paciente getPaciente() const;
-    void setPaciente(const Paciente &value);
-    Medico getMedico() const;
-    void setMedico(const Medico &value);
+    Paciente *getPaciente() const;
+    void setPaciente(Paciente *value);
+    Medico *getMedico() const;
+    void setMedico(Medico *value);
+
+    static Consulta * getInstance();
 };
 
 #endif // CONSULTA_H

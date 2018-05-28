@@ -2,6 +2,7 @@
 #define PESSOA_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -21,8 +22,10 @@ private:
 //    int telefone[9];
     string telefone;
     string email;
+    int index=0;
 public:
     Pessoa(){};
+    Pessoa(Pessoa*pessoa);
     Pessoa(string name, int age, Genero gender,
         string address, string phone, string mail);
 
@@ -43,6 +46,9 @@ public:
 //    void setTelefone(int *phone);
     void setTelefone(string phone);
     void setEmail(string mail);
+
+    virtual void atender() = 0;
+    virtual void descreverCaso() = 0;
 
 };
 

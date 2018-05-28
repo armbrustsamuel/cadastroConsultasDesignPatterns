@@ -11,25 +11,27 @@
 class Alerta
 {
 private:
-    Paciente paciente;
-    Medico medico;
-    string date; //redo using date lib
+    string paciente;
+    string medico;
+    string data; //redo using date lib
     string message;
     string emailDestino;
 public:
     Alerta(){};
-    Alerta(Paciente paciente, Medico medico,
+    Alerta(string paciente, string medico,
            string date, string mensagem, string emailDestino);
-    Paciente getPaciente() const;
-    void setPaciente(const Paciente &value);
-    Medico getMedico() const;
-    void setMedico(const Medico &value);
-    string getDate() const;
-    void setDate(const string &value);
+    string getData() const;
+    void setData(const string &value);
     string getMensagem() const;
     void setMensagem(const string &value);
     string getEmailDestino() const;
     void setEmailDestino(const string &value);
+    string getPaciente() const;
+    void setPaciente(const string &value);
+    string getMedico() const;
+    void setMedico(const string &value);
+
+    virtual void display();
 };
 
 #endif // ALERTA_H

@@ -2,12 +2,25 @@
 
 Pessoa::Pessoa(string name, int age, Genero gender,
                string address, string phone, string mail){
+    setId(index);
     setNome(name);
     setEndereco(address);
     setGenero(gender);
     setIdade(age);
     setTelefone(phone);
     setEmail(mail);
+    index+=1;
+}
+
+Pessoa::Pessoa(Pessoa *pessoa){
+    setId(index);
+    setNome(pessoa->getNome());
+    setEndereco(pessoa->getEndereco());
+    setGenero(pessoa->getGenero());
+    setIdade(pessoa->getIdade());
+    setTelefone(pessoa->getTelefone());
+    setEmail(pessoa->getEmail());
+    index+=1;
 }
 
 // get

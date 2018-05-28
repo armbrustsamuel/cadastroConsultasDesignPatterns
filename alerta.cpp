@@ -1,42 +1,44 @@
 #include "alerta.h"
 
-Alerta::Alerta(Paciente paciente, Medico medico, string date, string mensagem, string emailDestino)
+#include <iostream>
+
+void Alerta::setPaciente(const string &value)
 {
-    setDate(date);
+    paciente = value;
+}
+
+string Alerta::getPaciente() const
+{
+    return paciente;
+}
+
+string Alerta::getMedico() const
+{
+    return medico;
+}
+
+void Alerta::setMedico(const string &value)
+{
+    medico = value;
+}
+
+Alerta::Alerta(string paciente, string medico, string date, string mensagem, string emailDestino)
+{
+    setData(date);
     setPaciente(paciente);
     setMedico(medico);
     setEmailDestino(emailDestino);
     setMensagem(mensagem);
 }
 
-Paciente Alerta::getPaciente() const
+string Alerta::getData() const
 {
-    return paciente;
+    return data;
 }
 
-void Alerta::setPaciente(const Paciente &value)
+void Alerta::setData(const string &value)
 {
-    paciente = value;
-}
-
-Medico Alerta::getMedico() const
-{
-    return medico;
-}
-
-void Alerta::setMedico(const Medico &value)
-{
-    medico = value;
-}
-
-string Alerta::getDate() const
-{
-    return date;
-}
-
-void Alerta::setDate(const string &value)
-{
-    date = value;
+    data = value;
 }
 
 string Alerta::getMensagem() const
@@ -57,4 +59,16 @@ string Alerta::getEmailDestino() const
 void Alerta::setEmailDestino(const string &value)
 {
     emailDestino = value;
+}
+
+void Alerta::display()
+{
+    cout << endl;
+    cout << "Alerta" << endl;
+    cout << "Destinatario: " << getEmailDestino() << endl;
+    cout << "Mensagem: " << getMensagem() << endl;
+    cout << "Paciente: " << getPaciente() << endl;
+    cout << "Medico: " << getMedico() << endl;
+    cout << "Data: " << getData() << endl;
+    cout << endl;
 }

@@ -1,6 +1,9 @@
 #ifndef PESSOAFACTORY_H
 #define PESSOAFACTORY_H
 
+#include "paciente.h"
+#include "medico.h"
+
 enum class tipoPessoa{
     medico,
     paciente
@@ -9,11 +12,8 @@ enum class tipoPessoa{
 class pessoaFactory
 {
 public:
-    pessoaFactory();
-
     // Fabrica de pessoas
-    void createPessoa(tipoPessoa type);
-
+    virtual Pessoa * createPessoa(tipoPessoa type)=0;
 };
 
 #endif // PESSOAFACTORY_H
