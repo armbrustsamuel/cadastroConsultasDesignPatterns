@@ -9,6 +9,7 @@
 #include "pessoafactory.h"
 #include "pessoafactory.cpp"
 #include "novoexameobserver.h"
+#include "examefacade.h"
 #include "alerta.h"
 
 //remove (TEST)
@@ -39,8 +40,8 @@ int main()//int argc, char *argv[])
     medico->setGenero(Genero::masculino);
 
     // Criar exame
-    Exame * visao = new Exame("04/04/2018", "oftalmologia", "Hospital Central");
-    Exame * audicao = new Exame("01/04/2018", "otorrinolaringologia", "Consultorio Albernaz");
+    Exame * visao = new Exame("04/04/2018", "oftalmologia", "Hospital Central", medico->getNome());
+    Exame * audicao = new Exame("01/04/2018", "otorrinolaringologia", "Consultorio Albernaz", medico->getNome());
 
     // Criar consulta
     Consulta * consulta = Consulta::getInstance();
@@ -67,6 +68,11 @@ int main()//int argc, char *argv[])
     consulta->getPaciente()->setHistorico(historicoSamuel);
 
     // Adicionar novo exame
+    ExameFacade exm;
+    exm.proximaEtapa();
+    while (!exm.verificarEstado());
+    cout << "Exame aprovado depois de " << exm.numeroAtividades() << " atividades" << endl;
+    cout << endl;
     consulta->getPaciente()->getHistorico()->adicionarExame(visao);
 
     cout << "Paciente: " << consulta->getPaciente()->getNome() << endl;
