@@ -40,9 +40,20 @@ void Exame::setResultado(const string &value)
     resultado = value;
 }
 
-Exame::Exame(string date, string expertise, string address)
+string Exame::getMedico() const
+{
+    return medico;
+}
+
+void Exame::setMedico(const string &value)
+{
+    medico = value;
+}
+
+Exame::Exame(string date, string expertise, string address, string doctor)
 {
     setData(date);
     setEndereco(address);
     setEspecialidade(expertise);
+    setMedico(doctor);
 }

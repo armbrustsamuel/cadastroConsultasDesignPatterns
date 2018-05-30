@@ -10,8 +10,11 @@ private:
     static Historico * instance;
     int index=0;
     QList<Exame> *list = new QList<Exame>();
+    vector < class Observer * > views;
 public:
     Historico(){};
+
+    void attach(Observer *obs);
 
     static Historico *getInstance();
     QList<Exame> *getList() const;
@@ -21,6 +24,21 @@ public:
     void removerExame(Exame *exam);
 
     virtual void display();
+    void notify();
 };
+
+class Observer {
+    // 2. "dependent" functionality
+    Historico *model;
+
+public:
+    Observer(){};
+    Observer(Historico *mod);
+    virtual void update() = 0;
+
+protected:
+    Historico *getHistorico();
+};
+
 
 #endif // HISTORICO_H

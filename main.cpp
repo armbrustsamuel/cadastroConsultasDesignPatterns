@@ -8,6 +8,7 @@
 #include "consultorio.h"
 #include "pessoafactory.h"
 #include "pessoafactory.cpp"
+#include "novoexameobserver.h"
 #include "alerta.h"
 
 //remove (TEST)
@@ -60,6 +61,7 @@ int main()//int argc, char *argv[])
     list->insert(1,*audicao);
 
     Historico *historicoSamuel = new Historico();
+    NovoExameObserver obs(historicoSamuel);
     historicoSamuel->setList(list);
 
     consulta->getPaciente()->setHistorico(historicoSamuel);
@@ -79,6 +81,12 @@ int main()//int argc, char *argv[])
                 "04/04/2018",
                 "Nova Consulta",
                 "armbrust.samuel@gmail.com");
+
+    // Criar observer
+
+    // Criar UI
+
+    // Criar Facade e lista de dados -> acesso a dados passando pelo facade
 
     alerta1->display();
 

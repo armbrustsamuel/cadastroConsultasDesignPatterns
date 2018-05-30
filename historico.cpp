@@ -12,6 +12,7 @@ QList<Exame> *Historico::getList() const
 void Historico::setList(QList<Exame> *value)
 {
     list = value;
+    notify();
 }
 
 void Historico::adicionarExame(Exame *exam)
@@ -41,6 +42,18 @@ void Historico::display()
     }
 }
 
+void Historico::notify()
+{
+    // 5. Publisher broadcasts
+    for (int i = 0; i < views.size(); i++)
+        views[i]->update();
+}
+
+void Historico::attach(Observer *obs)
+{
+    views.push_back(obs);
+}
+
 Historico *Historico::getInstance()
 {
     if(instance == 0) {
@@ -49,3 +62,14 @@ Historico *Historico::getInstance()
     }
     return instance;
 }
+
+Historico *Observer::getHistorico() {
+    return model;
+}
+
+Observer::Observer(Historico *mod) {
+    model = mod;
+    // 4. Observers register themselves with the Subject
+    model->attach(this);
+}
+

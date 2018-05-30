@@ -16,11 +16,11 @@ public:
 
     void setEspecialidade(string specialMed);
     string getEspecialidade();
-
-    void atender(){std::cout << getPrescricao() << endl;}
-    void descreverCaso(){};
     string getPrescricao() const;
     void setPrescricao(const string &value);
+
+    void atender(){std::cout << "Diagnóstico: " << getPrescricao() << endl;}
+    void descreverCaso(){};
 };
 
 #endif // MEDICO_H

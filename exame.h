@@ -9,13 +9,14 @@ class Exame
 {
 private:
     string data;
+    string medico;
     string especialidade;
     string endereco;
     string resultado = "Pendente";
 
 public:
     Exame(){};
-    Exame(string date, string expertise, string address);
+    Exame(string date, string expertise, string address, string medico);
     string getData() const;
     void setData(const string &value);
     string getEspecialidade() const;
@@ -24,6 +25,8 @@ public:
     void setEndereco(const string &value);
     string getResultado() const;
     void setResultado(const string &value);
+    string getMedico() const;
+    void setMedico(const string &value);
 };
 
 #endif // EXAME_H

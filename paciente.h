@@ -22,7 +22,7 @@ public:
     void setHistorico(Historico *value);
 
     void atender(){};
-    void descreverCaso(){std::cout << "Eu estou com "<< enfermo << endl;}
+    void descreverCaso(){std::cout << "Sintoma: Eu estou com "<< enfermo << endl;}
 };
 
 #endif // PACIENTE_H
