@@ -10,6 +10,7 @@ private:
     string prescricao;
 public:
     Medico(){};
+    Medico(string nome);
     Medico(Pessoa*pessoa);
     Medico(string pain, string name, int age, Genero gender,
            string address, string phone, string mail);

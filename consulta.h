@@ -3,7 +3,7 @@
 
 #include <string>
 #include "paciente.h"
-#include <medico.h>
+#include "medico.h"
 
 using namespace std;
 

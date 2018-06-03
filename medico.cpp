@@ -22,6 +22,10 @@ Medico::Medico(Pessoa *pessoa):
 Pessoa(pessoa)
 {}
 
+Medico::Medico(string nome){
+    setNome(nome);
+}
+
 string Medico::getEspecialidade(){
     return especialidade;
 }

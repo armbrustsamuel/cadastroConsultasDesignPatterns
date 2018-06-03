@@ -11,6 +11,7 @@ private:
     Historico * historico;
 public:
     Paciente(){};
+    Paciente(string nome);
     Paciente(Pessoa*pessoa);
     Paciente(string pain, string name, int age, Genero gender,
               string address, string phone, string mail);

@@ -1,16 +1,5 @@
 #include "paciente.h"
 
-Historico *Paciente::getHistorico() const
-{
-    // getHistoricoFromDataBase
-    return historico;
-}
-
-void Paciente::setHistorico(Historico *value)
-{
-    historico = value;
-}
-
 Paciente::Paciente(string pain, string name, int age,
                    Genero gender, string address,
                    string phone, string mail):
@@ -21,7 +10,20 @@ Paciente::Paciente(string pain, string name, int age,
 
 Paciente::Paciente(Pessoa*pessoa):
     Pessoa(pessoa)
+{}
+
+Historico *Paciente::getHistorico() const
 {
+    return historico;
+}
+
+void Paciente::setHistorico(Historico *value)
+{
+    historico = value;
+}
+
+Paciente::Paciente(string nome){
+    setNome(nome);
 }
 
 void Paciente::setEnfermo(string pain){

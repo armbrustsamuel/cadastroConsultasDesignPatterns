@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 
+// To mock history
+#include "historico.h"
+
 using namespace std;
 
 enum class Genero {
@@ -22,6 +25,7 @@ private:
 //    int telefone[9];
     string telefone;
     string email;
+    Historico * historico;
     int index=0;
 public:
     Pessoa(){};
@@ -50,6 +54,10 @@ public:
     virtual void atender() = 0;
     virtual void descreverCaso() = 0;
 
+    Historico * mockHistory();
+
+//    Historico *getHistorico() const;
+//    void setHistorico(Historico *value);
 };
 
 #endif // PESSOA_H

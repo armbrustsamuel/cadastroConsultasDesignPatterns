@@ -12,6 +12,16 @@ Pessoa::Pessoa(string name, int age, Genero gender,
     index+=1;
 }
 
+//Historico *Pessoa::getHistorico() const
+//{
+//    return historico;
+//}
+
+//void Pessoa::setHistorico(Historico *value)
+//{
+//    historico = value;
+//}
+
 Pessoa::Pessoa(Pessoa *pessoa){
     setId(index);
     setNome(pessoa->getNome());
@@ -66,6 +76,27 @@ void Pessoa::setTelefone(string phone){
 void Pessoa::setEmail(string mail){
     email = mail;
 }
+
+Historico *Pessoa::mockHistory()
+{
+    // Criar exame
+    Exame * visao = new Exame("04/04/2018", "oftalmologia", "Hospital Central", "Samuel");
+    Exame * audicao = new Exame("01/04/2018", "otorrinolaringologia", "Consultorio Albernaz", "Pedro Henrique");
+
+    // Criar histórico
+    QList<Exame> *list = new QList<Exame>();
+    list->insert(1,*audicao);
+    list->insert(2,*visao);
+
+    Historico *historicoMock = new Historico();
+    historicoMock->setList(list);
+
+    return historicoMock;
+
+//    sethistoricoSamuel;
+    // MUDAR HISTORICO PARA PESSOA -> REMOVER DE PACIENTE
+}
+
 void Pessoa::setId(double value)
 {
     id = value;
