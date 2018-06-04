@@ -85,16 +85,32 @@ Historico *Pessoa::mockHistory()
 
     // Criar histórico
     QList<Exame> *list = new QList<Exame>();
-    list->insert(1,*audicao);
-    list->insert(2,*visao);
+    list->insert(999,*audicao);
+    list->insert(998,*visao);
 
     Historico *historicoMock = new Historico();
     historicoMock->setList(list);
 
     return historicoMock;
+}
 
-//    sethistoricoSamuel;
-    // MUDAR HISTORICO PARA PESSOA -> REMOVER DE PACIENTE
+Historico *Pessoa::mockHistory(string nome)
+{
+    // Criar exame
+    Exame * visao = new Exame("04/04/2018", "oftalmologia", "Hospital Central", "Samuel");
+    visao->setPaciente(nome);
+    Exame * audicao = new Exame("01/04/2018", "otorrinolaringologia", "Consultorio Albernaz", "Pedro Henrique");
+    audicao->setPaciente(nome);
+
+    // Criar histórico
+    QList<Exame> *list = new QList<Exame>();
+    list->insert(999,*audicao);
+    list->insert(998,*visao);
+
+    Historico *historicoMock = new Historico();
+    historicoMock->setList(list);
+
+    return historicoMock;
 }
 
 void Pessoa::setId(double value)

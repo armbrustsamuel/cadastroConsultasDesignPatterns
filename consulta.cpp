@@ -22,6 +22,14 @@ void Consulta::setMedico(Medico *value)
     medico = value;
 }
 
+void Consulta::addExame(Exame *exame)
+{
+    // Add new exame
+    list->insert(indexExame, *exame);
+    indexExame= indexExame++;
+    notify();
+}
+
 Consulta *Consulta::getInstance()
 {
     if(instance == 0) {
@@ -38,6 +46,28 @@ Consulta *Consulta::getInstance()
 //    setPaciente(patient);
 //    setMedico(doctor);
 //}
+
+QList<Exame> *Consulta::getList() const
+{
+    return list;
+}
+
+void Consulta::setList(QList<Exame> *value)
+{
+    list = value;
+}
+
+void Consulta::attach(Observer *obs)
+{
+    views.push_back(obs);
+}
+
+void Consulta::notify()
+{
+    // 5. Publisher broadcasts
+    for (int i = 0; i < views.size(); i++)
+        views[i]->update();
+}
 
 string Consulta::getConsultorio() const
 {
@@ -57,4 +87,14 @@ string Consulta::getExame() const
 void Consulta::setExame(const string &value)
 {
     exame = value;
+}
+
+Consulta *Observer::getConsulta() {
+    return model;
+}
+
+Observer::Observer(Consulta *mod) {
+    model = mod;
+    // 4. Observers register themselves with the Subject
+    model->attach(this);
 }

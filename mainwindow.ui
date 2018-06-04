@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1051</width>
+    <width>1169</width>
     <height>629</height>
    </rect>
   </property>
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1036</width>
-      <height>551</height>
+      <width>1151</width>
+      <height>557</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -78,7 +78,7 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>120</width>
+               <width>150</width>
                <height>16777215</height>
               </size>
              </property>
@@ -296,20 +296,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="especialidadeTxt">
-             <property name="minimumSize">
-              <size>
-               <width>50</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>120</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
+            <widget class="QComboBox" name="especialidadeCbox"/>
            </item>
           </layout>
          </item>
@@ -344,14 +331,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="resultadoTxt">
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
+            <widget class="QComboBox" name="resultadoCbox"/>
            </item>
           </layout>
          </item>
@@ -377,9 +357,9 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="listarExameBtn">
+              <widget class="QPushButton" name="processarExame">
                <property name="text">
-                <string>Listar Exames</string>
+                <string>Processar Exame</string>
                </property>
               </widget>
              </item>
@@ -413,14 +393,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="pacienteConsultaTxt">
-           <property name="maximumSize">
-            <size>
-             <width>150</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
+          <widget class="QComboBox" name="pacienteConsultaCbox"/>
          </item>
         </layout>
        </item>
@@ -434,20 +407,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="medicoConsultaTxt">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>120</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
+          <widget class="QComboBox" name="medicoConsultaCbox"/>
          </item>
         </layout>
        </item>
@@ -457,6 +417,13 @@
           <widget class="QLabel" name="exameConsultaLbl">
            <property name="text">
             <string>Exame:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="adicionarExameBtn">
+           <property name="text">
+            <string>Adicionar</string>
            </property>
           </widget>
          </item>
@@ -475,14 +442,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="consultorioTxt">
-           <property name="maximumSize">
-            <size>
-             <width>150</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
+          <widget class="QComboBox" name="consultorioCbox"/>
          </item>
         </layout>
        </item>
@@ -535,9 +495,9 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_15">
          <item>
-          <widget class="QLabel" name="consultasMarcadasLbl">
+          <widget class="QLabel" name="alteracoesConsulta">
            <property name="text">
-            <string>Consultas Marcadas:</string>
+            <string>Alterações Consulta:</string>
            </property>
           </widget>
          </item>
@@ -547,7 +507,7 @@
          <item>
           <widget class="QLabel" name="resultadoExamesLbl">
            <property name="text">
-            <string>Resultados Exames:</string>
+            <string>Exames:</string>
            </property>
           </widget>
          </item>
@@ -564,9 +524,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="criarPessoaBtn_3">
+            <widget class="QPushButton" name="enviarAlertaBtn">
              <property name="text">
-              <string>Ver Resultados</string>
+              <string>Enviar Alerta</string>
              </property>
             </widget>
            </item>
@@ -584,7 +544,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1051</width>
+     <width>1169</width>
      <height>22</height>
     </rect>
    </property>

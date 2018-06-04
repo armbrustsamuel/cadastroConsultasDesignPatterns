@@ -8,8 +8,10 @@ using namespace std;
 class Exame
 {
 private:
+    int id;
     string data;
     string medico;
+    string paciente;
     string especialidade;
     string endereco;
     string resultado = "Pendente";
@@ -17,6 +19,7 @@ private:
 public:
     Exame(){};
     Exame(string date, string expertise, string address, string medico);
+    Exame(string date, string expertise, string address, string medico, string paciente);
     string getData() const;
     void setData(const string &value);
     string getEspecialidade() const;
@@ -27,6 +30,10 @@ public:
     void setResultado(const string &value);
     string getMedico() const;
     void setMedico(const string &value);
+    string getPaciente() const;
+    void setPaciente(const string &value);
+    int getId() const;
+    void setId(int value);
 };
 
 #endif // EXAME_H

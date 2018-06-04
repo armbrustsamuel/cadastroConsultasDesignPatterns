@@ -1,6 +1,6 @@
 #include "novoexameobserver.h"
 
-NovoExameObserver::NovoExameObserver(Historico *mod):
+NovoExameObserver::NovoExameObserver(Consulta *mod):
     Observer(mod)
 {
 

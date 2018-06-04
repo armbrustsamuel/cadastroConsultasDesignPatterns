@@ -50,10 +50,39 @@ void Exame::setMedico(const string &value)
     medico = value;
 }
 
+string Exame::getPaciente() const
+{
+    return paciente;
+}
+
+void Exame::setPaciente(const string &value)
+{
+    paciente = value;
+}
+
+int Exame::getId() const
+{
+    return id;
+}
+
+void Exame::setId(int value)
+{
+    id = value;
+}
+
 Exame::Exame(string date, string expertise, string address, string doctor)
 {
     setData(date);
     setEndereco(address);
     setEspecialidade(expertise);
     setMedico(doctor);
+}
+
+Exame::Exame(string date, string expertise, string address, string doctor, string paciente)
+{
+    setData(date);
+    setEndereco(address);
+    setEspecialidade(expertise);
+    setMedico(doctor);
+    setPaciente(paciente);
 }

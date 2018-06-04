@@ -55,6 +55,7 @@ public:
     virtual void descreverCaso() = 0;
 
     Historico * mockHistory();
+    Historico * mockHistory(string nome);
 
 //    Historico *getHistorico() const;
 //    void setHistorico(Historico *value);

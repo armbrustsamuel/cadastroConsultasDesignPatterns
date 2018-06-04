@@ -1,13 +1,14 @@
 #ifndef NOVOEXAMEOBSERVER_H
 #define NOVOEXAMEOBSERVER_H
 
-#include "historico.h"
+//#include "historico.h"
+#include "consulta.h"
 #include <iostream>
 
 class NovoExameObserver: public Observer
 {
 public:
-    NovoExameObserver(Historico *mod);
+    NovoExameObserver(Consulta *mod);
     void update();
 };
 

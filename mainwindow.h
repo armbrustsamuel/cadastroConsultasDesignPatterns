@@ -24,24 +24,31 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    int pessoaIndex=0;
+    int pessoaIndex=1;
+    int exameId=0;
     explicit MainWindow(QWidget *parent = 0);
     pessoaFactory * factory;
     QList<Medico> *medicoList = new QList<Medico>();
     QList<Paciente> *pacienteList = new QList<Paciente>();
+    QList<Exame> *exameList = new QList<Exame>();
 
     ~MainWindow();
 
 private slots:
-
-
-    void on_listarExameBtn_pressed();
 
     void on_criarExameBtn_pressed();
 
     void on_criarPessoaBtn_pressed();
 
     void on_historicoBtn_pressed();
+
+    void on_adicionarExameBtn_pressed();
+
+    void on_processarExame_pressed();
+
+    void on_marcarConsultaBtn_pressed();
+
+    void on_letExamesBtn_pressed();
 
 private:
     Ui::MainWindow *ui;

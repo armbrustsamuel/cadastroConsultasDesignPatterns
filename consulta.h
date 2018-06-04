@@ -16,9 +16,14 @@ private:
     Paciente * paciente;
     Medico * medico;
     Consulta(){};
-
+    QList<Exame> *list = new QList<Exame>();
+    vector < class Observer * > views;
+    int indexExame=0;
 public:
 //    Consulta(string place, string exam, Paciente *patient, Medico *doctor);
+
+    void attach(Observer *obs);
+    void notify();
 
     string getConsultorio() const;
     void setConsultorio(const string &value);
@@ -29,7 +34,25 @@ public:
     Medico *getMedico() const;
     void setMedico(Medico *value);
 
+    void addExame(Exame *exame);
+
     static Consulta * getInstance();
+    QList<Exame> *getList() const;
+    void setList(QList<Exame> *value);
 };
+
+class Observer {
+    // 2. "dependent" functionality
+    Consulta *model;
+
+public:
+    Observer(){};
+    Observer(Consulta *mod);
+    virtual void update() = 0;
+
+protected:
+    Consulta *getConsulta();
+};
+
 
 #endif // CONSULTA_H
