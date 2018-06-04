@@ -200,6 +200,13 @@
             <widget class="QTextEdit" name="historicoTxt"/>
            </item>
            <item>
+            <widget class="QPushButton" name="testeBtn">
+             <property name="text">
+              <string>Atualizar Memória</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <layout class="QHBoxLayout" name="horizontalLayout_37">
              <item>
               <widget class="QPushButton" name="historicoBtn">
@@ -502,7 +509,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="consultasMarcadasTxt"/>
+          <widget class="QTextEdit" name="alteracoesConsultaTxt"/>
          </item>
          <item>
           <widget class="QLabel" name="resultadoExamesLbl">

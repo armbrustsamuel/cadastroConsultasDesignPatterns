@@ -3,7 +3,6 @@
 
 //#include "historico.h"
 #include "consulta.h"
-#include <iostream>
 
 class NovoExameObserver: public Observer
 {

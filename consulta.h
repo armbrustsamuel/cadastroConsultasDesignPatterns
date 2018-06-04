@@ -4,6 +4,7 @@
 #include <string>
 #include "paciente.h"
 #include "medico.h"
+#include <iostream>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ private:
     vector < class Observer * > views;
     int indexExame=0;
 public:
+    QList<string> *log = new QList<string>();
 //    Consulta(string place, string exam, Paciente *patient, Medico *doctor);
 
     void attach(Observer *obs);
@@ -39,6 +41,8 @@ public:
     static Consulta * getInstance();
     QList<Exame> *getList() const;
     void setList(QList<Exame> *value);
+    QList<string> *getLog() const;
+    void setLog(QList<string> *value);
 };
 
 class Observer {

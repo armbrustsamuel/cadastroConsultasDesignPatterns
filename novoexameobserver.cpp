@@ -12,4 +12,6 @@ void NovoExameObserver::update()
     cout << endl;
     cout << "Novo Exame adicionado ao histórico" << endl;
     cout << endl;
+
 }
+

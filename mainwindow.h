@@ -15,6 +15,8 @@
 #include "examefacade.h"
 #include "alerta.h"
 
+#include <QByteArray>
+
 namespace Ui {
 class MainWindow;
 }
@@ -28,11 +30,20 @@ public:
     int exameId=0;
     explicit MainWindow(QWidget *parent = 0);
     pessoaFactory * factory;
+    Consulta * consulta;
     QList<Medico> *medicoList = new QList<Medico>();
     QList<Paciente> *pacienteList = new QList<Paciente>();
     QList<Exame> *exameList = new QList<Exame>();
 
+    NovoExameObserver *obs;
+
     ~MainWindow();
+
+    void carregarPessoas();
+    void carregarMedicos();
+
+    void savePacientes();
+    void saveMedicos();
 
 private slots:
 
@@ -49,6 +60,8 @@ private slots:
     void on_marcarConsultaBtn_pressed();
 
     void on_letExamesBtn_pressed();
+
+    void on_testeBtn_pressed();
 
 private:
     Ui::MainWindow *ui;

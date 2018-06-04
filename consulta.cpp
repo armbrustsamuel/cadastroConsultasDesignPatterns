@@ -26,7 +26,7 @@ void Consulta::addExame(Exame *exame)
 {
     // Add new exame
     list->insert(indexExame, *exame);
-    indexExame= indexExame++;
+    indexExame+=1;
     notify();
 }
 
@@ -57,6 +57,16 @@ void Consulta::setList(QList<Exame> *value)
     list = value;
 }
 
+QList<string> *Consulta::getLog() const
+{
+    return log;
+}
+
+void Consulta::setLog(QList<string> *value)
+{
+    log = value;
+}
+
 void Consulta::attach(Observer *obs)
 {
     views.push_back(obs);
@@ -65,8 +75,9 @@ void Consulta::attach(Observer *obs)
 void Consulta::notify()
 {
     // 5. Publisher broadcasts
-    for (int i = 0; i < views.size(); i++)
+    for (int i = 0; i < views.size(); i++){
         views[i]->update();
+    }
 }
 
 string Consulta::getConsultorio() const
