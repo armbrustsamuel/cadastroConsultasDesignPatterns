@@ -74,10 +74,12 @@ void Consulta::attach(Observer *obs)
 
 void Consulta::notify()
 {
+    string *t;
     // 5. Publisher broadcasts
     for (int i = 0; i < views.size(); i++){
-        views[i]->update();
+        t = views[i]->update();
     }
+    this->getLog()->insert(indexExame, *t);
 }
 
 string Consulta::getConsultorio() const

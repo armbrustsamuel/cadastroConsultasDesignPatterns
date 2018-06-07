@@ -28,12 +28,14 @@ class MainWindow : public QMainWindow
 public:
     int pessoaIndex=1;
     int exameId=0;
+    int consultaIndex=0;
     explicit MainWindow(QWidget *parent = 0);
     pessoaFactory * factory;
     Consulta * consulta;
     QList<Medico> *medicoList = new QList<Medico>();
     QList<Paciente> *pacienteList = new QList<Paciente>();
     QList<Exame> *exameList = new QList<Exame>();
+    QList<Consulta> *consultaList = new QList<Consulta>();
 
     NovoExameObserver *obs;
 
@@ -41,9 +43,11 @@ public:
 
     void carregarPessoas();
     void carregarMedicos();
+//    void carregarConsultas();
 
     void savePacientes();
     void saveMedicos();
+//    void saveConsultas();
 
 private slots:
 
@@ -67,6 +71,7 @@ private:
     Ui::MainWindow *ui;
 
     void displayMedico();
+    void displayPacientes();
     void displayHistorico();
     void displayExame(Exame *exame);
 };

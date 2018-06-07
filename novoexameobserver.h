@@ -8,7 +8,7 @@ class NovoExameObserver: public Observer
 {
 public:
     NovoExameObserver(Consulta *mod);
-    void update();
+    string *update();
 };
 
 #endif // NOVOEXAMEOBSERVER_H

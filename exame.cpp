@@ -68,6 +68,7 @@ int Exame::getId() const
 void Exame::setId(int value)
 {
     id = value;
+    notify();
 }
 
 Exame::Exame(string date, string expertise, string address, string doctor)
@@ -85,4 +86,43 @@ Exame::Exame(string date, string expertise, string address, string doctor, strin
     setEspecialidade(expertise);
     setMedico(doctor);
     setPaciente(paciente);
+}
+
+Exame *ObserverExame::getExame()
+{
+    return model;
+}
+
+ObserverExame::ObserverExame(Exame *mod) {
+    model = mod;
+    // 4. Observers register themselves with the Subject
+    model->attach(this);
+}
+
+void Exame::notify()
+{
+    string *t;
+    // 5. Publisher broadcasts
+    for (int i = 0; i < views.size(); i++){
+//        if ( this->getData().substr(6,4) < "2010" ){
+            t = views[i]->update();
+//        }
+        // Verificar uma forma de testar data muito antiga!
+    }
+    this->getLog()->insert(indexExame, *t);
+}
+
+QList<string> *Exame::getLog() const
+{
+    return log;
+}
+
+void Exame::setLog(QList<string> *value)
+{
+    log = value;
+}
+
+void Exame::attach(ObserverExame *obs)
+{
+    views.push_back(obs);
 }

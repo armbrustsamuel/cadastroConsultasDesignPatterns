@@ -6,12 +6,14 @@ NovoExameObserver::NovoExameObserver(Consulta *mod):
 
 }
 
-void NovoExameObserver::update()
+string * NovoExameObserver::update()
 {
-    //getHistorico()->getList();
-    cout << endl;
-    cout << "Novo Exame adicionado ao histórico" << endl;
-    cout << endl;
+//    cout << endl;
+//    cout << "Novo Exame adicionado ao histórico" << endl;
+//    cout << endl;
+
+    string * t = new string("Novo Exame adicionado ao histórico");
+    return t;
 
 }
 

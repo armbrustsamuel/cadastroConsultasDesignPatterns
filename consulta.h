@@ -16,11 +16,14 @@ private:
     string exame;
     Paciente * paciente;
     Medico * medico;
-    Consulta(){};
+
     QList<Exame> *list = new QList<Exame>();
     vector < class Observer * > views;
     int indexExame=0;
+    int indexNotifyExame=0;
+    int indexNotifyResumo=0;
 public:
+    Consulta(){};
     QList<string> *log = new QList<string>();
 //    Consulta(string place, string exam, Paciente *patient, Medico *doctor);
 
@@ -52,11 +55,10 @@ class Observer {
 public:
     Observer(){};
     Observer(Consulta *mod);
-    virtual void update() = 0;
+    virtual string * update() = 0;
 
 protected:
     Consulta *getConsulta();
 };
-
 
 #endif // CONSULTA_H

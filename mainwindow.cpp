@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     carregarPessoas();
     carregarMedicos();
+//    carregarConsultas();
 }
 
 MainWindow::~MainWindow()
@@ -69,9 +70,39 @@ void MainWindow::on_criarExameBtn_pressed()
     exame->setResultado(this->ui->resultadoCbox->itemText(this->ui->resultadoCbox->currentIndex()).toStdString());
 
     this->ui->exameConsultaCbox->addItem(QString::number(exameId));
+    this->ui->exameConsultaCbox_2->addItem(QString::number(exameId));
     exameList->insert(exameId, *exame);
     displayExame(exame);
     exameId++;
+
+    QList<Exame> * exameList = new QList<Exame>();
+
+    // carregar consulta do arquivo
+    if(consultaList->size() > 1){
+        for(int i = 1; i<consultaList->size(); i++){
+            Consulta * cons = new Consulta(consultaList->at(i));
+            if(cons->getPaciente()->getNome() == this->ui->pacienteExameCbox->itemText(this->ui->pacienteExameCbox->currentIndex()).toStdString()) {
+                exameList = cons->getList();
+                if(exameList->size() > 1){
+                    for(int i = 0; i<exameList->size(); i++){
+                        Exame *aux = new Exame(exameList->at(i));
+                        this->ui->resumoConsultaTxt->append("");
+                        this->ui->resumoConsultaTxt->append("Exame: "+ QString::number(aux->getId()));
+                        this->ui->resumoConsultaTxt->append("Médico: " + QString::fromStdString(aux->getMedico()));
+                        this->ui->resumoConsultaTxt->append("Endereço: " + QString::fromStdString(aux->getEndereco()));
+                        this->ui->resumoConsultaTxt->append("Data: " + QString::fromStdString(aux->getData()));
+                        this->ui->resumoConsultaTxt->append("Resultado: " + QString::fromStdString(aux->getResultado()));
+                        this->ui->resumoConsultaTxt->append("Consultório: " + QString::fromStdString(consulta->getConsultorio()));
+                    }
+                }
+            }
+        }
+    }
+
+    if(consultaList->isEmpty()){
+        consultaList->insert(0, *consulta);
+    }
+
 }
 
 void MainWindow::on_criarPessoaBtn_pressed()
@@ -130,19 +161,16 @@ void MainWindow::on_criarPessoaBtn_pressed()
 //    Paciente * paciente = new Paciente(pessoa);
 //    paciente->setHistorico(pessoa->mockHistory());
 
-    // Instead of write in cmd, display in the textEdit
-//    paciente->getHistorico()->display();
-//    this->ui->historicoTxt->append();
-
     pessoaIndex+=1;
 }
 
 void MainWindow::on_historicoBtn_pressed()
 {
-    this->ui->historicoTxt->clear();
+    this->ui->pacientesTxt->clear();
     this->ui->medicosTxt->clear();
-    displayHistorico();
+//    displayHistorico();
     displayMedico();
+    displayPacientes();
 }
 
 void MainWindow::displayMedico()
@@ -167,6 +195,26 @@ void MainWindow::displayMedico()
     }
 }
 
+void MainWindow::displayPacientes()
+{
+    // loop into the medicoList and display each one
+    if(pacienteList->size() > 1){
+        for(int i = 1; i<pacienteList->size(); i++){
+            Paciente paciente = new Paciente(pacienteList->at(i));
+            this->ui->pacientesTxt->append("");
+            this->ui->pacientesTxt->append("Nome: " + QString::fromStdString(paciente.getNome()));
+            if(paciente.getGenero() == Genero::masculino){
+                this->ui->pacientesTxt->append("Gênero: Masculino");
+            } else if (paciente.getGenero() == Genero::feminino){
+                this->ui->pacientesTxt->append("Gênero: Feminino");
+            }
+            this->ui->pacientesTxt->append("Idade: " + paciente.getIdade());
+            this->ui->pacientesTxt->append("Telefone: " + QString::fromStdString(paciente.getTelefone()));
+            this->ui->pacientesTxt->append("Endereço: " + QString::fromStdString(paciente.getEndereco()));
+        }
+    }
+}
+
 void MainWindow::displayHistorico()
 {
     if(pacienteList->size() > 1){
@@ -180,13 +228,13 @@ void MainWindow::displayHistorico()
                 if(auxHistorico->getList()->size() > 1){
                     for(int i = 0; i<auxHistorico->getList()->size(); i++){
                         Exame exame = auxHistorico->getList()->at(i);
-                        this->ui->historicoTxt->append("");
-                        this->ui->historicoTxt->append("Exame de " + QString::fromStdString(exame.getEspecialidade()));
-                        this->ui->historicoTxt->append("Médico: " + QString::fromStdString(exame.getMedico()));
-                        this->ui->historicoTxt->append("Paciente: " + QString::fromStdString(exame.getPaciente()));
-                        this->ui->historicoTxt->append("Data: " + QString::fromStdString(exame.getData()));
-                        this->ui->historicoTxt->append("Endereço: " + QString::fromStdString(exame.getEndereco()));
-                        this->ui->historicoTxt->append("Resultado: " + QString::fromStdString(exame.getResultado()));
+//                        this->ui->historicoTxt->append("");
+//                        this->ui->historicoTxt->append("Exame de " + QString::fromStdString(exame.getEspecialidade()));
+//                        this->ui->historicoTxt->append("Médico: " + QString::fromStdString(exame.getMedico()));
+//                        this->ui->historicoTxt->append("Paciente: " + QString::fromStdString(exame.getPaciente()));
+//                        this->ui->historicoTxt->append("Data: " + QString::fromStdString(exame.getData()));
+//                        this->ui->historicoTxt->append("Endereço: " + QString::fromStdString(exame.getEndereco()));
+//                        this->ui->historicoTxt->append("Resultado: " + QString::fromStdString(exame.getResultado()));
                     }
                 }
             }
@@ -202,6 +250,7 @@ void MainWindow::displayExame(Exame * exame)
     this->ui->examesTxt->append("Médico: "+QString::fromStdString(exame->getMedico()));
     this->ui->examesTxt->append("Data: "+QString::fromStdString(exame->getData()));
     this->ui->examesTxt->append("Endereço: "+QString::fromStdString(exame->getEndereco()));
+    this->ui->examesTxt->append("Resultado: "+QString::fromStdString(exame->getResultado()));
 }
 
 void MainWindow::on_adicionarExameBtn_pressed()
@@ -210,19 +259,21 @@ void MainWindow::on_adicionarExameBtn_pressed()
         for(int i = 0; i<exameList->size(); i++){
             Exame *exame = new Exame(exameList->at(i));
             if(exame->getId() == this->ui->exameConsultaCbox->itemText(this->ui->exameConsultaCbox->currentIndex()).toInt()){
-                consulta->addExame(exame);
+
                 this->ui->resumoConsultaTxt->append("Exame: "+QString::number(exame->getId()));
 
-                ExameFacade exm;
-                exm.proximaEtapa();
-                while (!exm.verificarEstado());
-                exame->setResultado("Pronto");
+//                ExameFacade exm;
+//                exm.proximaEtapa();
+//                while (!exm.verificarEstado());
+//                exame->setResultado("Pronto");
 
+                consulta->addExame(exame);
+
+                this->ui->alteracoesConsultaTxt->clear();
                 for(int i=0; i<consulta->getLog()->size(); i++){
-                    this->ui->alteracoesConsultaTxt->append(QString::fromStdString(consulta->log->at(i)));
+                    string log = consulta->log->at(i);
+                    this->ui->alteracoesConsultaTxt->append(QString::fromStdString(log));
                 }
-                // REVER implementação do Observer
-                // DO implementation for FACADE
             }
         }
     }
@@ -240,9 +291,11 @@ void MainWindow::carregarPessoas()
             g.seek(test*(sizeof(Paciente)));
             g.read(BufferBytes, sizeof(Paciente));
             memcpy(paciente, BufferBytes, sizeof(Paciente));
-            this->ui->historicoTxt->append("Paciente:");
-            this->ui->historicoTxt->append(QString::fromStdString(paciente->getNome())+
-                  " :: "+QString::fromStdString(paciente->getTelefone())+ " :: "+QString::number(paciente->getIdade()));
+            this->ui->pacientesTxt->append("");
+            this->ui->pacientesTxt->append("Paciente:");
+            this->ui->pacientesTxt->append(QString::fromStdString(paciente->getNome()));
+            this->ui->pacientesTxt->append("Telefone: "+QString::fromStdString(paciente->getTelefone()));
+            this->ui->pacientesTxt->append("Idade: "+QString::number(paciente->getIdade()));
             pacienteList->insert(pessoaIndex, paciente);
             this->ui->pacienteExameCbox->addItem(QString::fromStdString(paciente->getNome()));
             this->ui->pacienteConsultaCbox->addItem(QString::fromStdString(paciente->getNome()));
@@ -267,9 +320,11 @@ void MainWindow::carregarMedicos()
             g.seek(test*(sizeof(Medico)));
             g.read(BufferBytes, sizeof(Medico));
             memcpy(medico, BufferBytes, sizeof(Medico));
-            this->ui->historicoTxt->append("Medico:");
-            this->ui->historicoTxt->append(QString::fromStdString(medico->getNome())+
-                  " :: "+QString::fromStdString(medico->getTelefone())+ " :: "+QString::number(medico->getIdade()));
+            this->ui->medicosTxt->append("");
+            this->ui->medicosTxt->append("Medico:");
+            this->ui->medicosTxt->append(QString::fromStdString(medico->getNome()));
+            this->ui->medicosTxt->append("Telefone: "+QString::fromStdString(medico->getTelefone()));
+            this->ui->medicosTxt->append("Idade: "+QString::number(medico->getIdade()));
             medicoList->insert(pessoaIndex, medico);
             this->ui->medicoExameCbox->addItem(QString::fromStdString(medico->getNome()));
             this->ui->medicoConsultaCbox->addItem(QString::fromStdString(medico->getNome()));
@@ -282,10 +337,33 @@ void MainWindow::carregarMedicos()
     test = 0;
 }
 
+//void MainWindow::carregarConsultas(){
+//    QFile g("/Users/samuel/Documents/Unisinos/Programacao_Orientada_Objeto_II/TGB/CadastroConsultas/consultas.bin");
+//    char BufferBytes[sizeof(Consulta)];
+//    Consulta * consulta = new Consulta();
+//    int test=0;
+
+//    if(g.open(QIODevice::ReadWrite)){
+//        while(!g.atEnd()){
+//            g.seek(test*(sizeof(Consulta)));
+//            g.read(BufferBytes, sizeof(Consulta));
+//            memcpy(consulta, BufferBytes, sizeof(Consulta));
+//            consultaList->insert(consultaIndex, *consulta);
+//            consultaIndex+=1;
+//            test++;
+//        }
+//        g.flush();
+//        g.close();
+//    }
+//    test = 0;
+//}
+
 void MainWindow::savePacientes()
 {
     QFile *f;
     f = new QFile("/Users/samuel/Documents/Unisinos/Programacao_Orientada_Objeto_II/TGB/CadastroConsultas/pacienteList.bin");
+
+    f->remove();
 
     if(pacienteList->size() > 1){
         for(int i = 1; i<pacienteList->size(); i++){
@@ -302,10 +380,33 @@ void MainWindow::savePacientes()
     }
 }
 
+//void MainWindow::saveConsultas(){
+//    QFile *f;
+//    f = new QFile("/Users/samuel/Documents/Unisinos/Programacao_Orientada_Objeto_II/TGB/CadastroConsultas/consultas.bin");
+
+//    f->remove();
+
+//    if(consultaList->size() >= 1){
+//        for(int i = 0; i<consultaList->size(); i++){
+//            Consulta *aux = new Consulta(this->consultaList->at(i));
+//            if(f->open(QIODevice::WriteOnly | QIODevice::Append)){
+//                QDataStream ds (f);
+//                char BufferBytes[sizeof(Consulta)];
+//                std::memcpy(BufferBytes, aux, sizeof(Consulta));
+//                f->write(BufferBytes, sizeof(Consulta));
+//                f->flush();
+//                f->close();
+//            }
+//        }
+//    }
+//}
+
 void MainWindow::saveMedicos()
 {
     QFile *f;
     f = new QFile("/Users/samuel/Documents/Unisinos/Programacao_Orientada_Objeto_II/TGB/CadastroConsultas/medicoList.bin");
+
+    f->remove();
 
     if(medicoList->size() > 1){
         for(int i = 1; i<medicoList->size(); i++){
@@ -324,21 +425,31 @@ void MainWindow::saveMedicos()
 
 void MainWindow::on_processarExame_pressed()
 {
-    // Pegar o exame atual
-    // Here goes de FACADE - follow example in main.cpp
-    //    // Adicionar novo exame
-    //    ExameFacade exm;
-    //    exm.proximaEtapa();
-    //    while (!exm.verificarEstado());
-    //    cout << "Exame aprovado depois de " << exm.numeroAtividades() << " atividades" << endl;
-    //    cout << endl;
-    //    consulta->getPaciente()->getHistorico()->adicionarExame(visao);
+    if(consulta->getList()->size() > 1){
+        for(int i = 0; i<consulta->getList()->size(); i++){
+            Exame *exame = new Exame(exameList->at(i));
+            if(exame->getId() == this->ui->exameConsultaCbox_2->itemText(this->ui->exameConsultaCbox_2->currentIndex()).toInt()){
+                ExameFacade exm;
+                exm.proximaEtapa();
+                while (!exm.verificarEstado());
+                exame->setResultado("Pronto");
+                consulta->getList()->replace(i, *exame);
+            }
+        }
+    }
 }
 
 void MainWindow::on_marcarConsultaBtn_pressed()
 {
-    // Here goes the OBSERVER - follow example in main.cpp
+    this->ui->resumoConsultaTxt->clear();
+    this->ui->resumoConsultaTxt->append("Consulta marcada para "+ this->ui->pacienteConsultaCbox->itemText(this->ui->pacienteConsultaCbox->currentIndex()));
+    this->ui->resumoConsultaTxt->append(this->ui->medicoConsultaCbox->itemText(this->ui->medicoConsultaCbox->currentIndex())
+                                            + " está atendendo em " +
+                                        this->ui->consultorioCbox->itemText(this->ui->consultorioCbox->currentIndex()));
+    consulta->setConsultorio(this->ui->consultorioCbox->itemText(this->ui->consultorioCbox->currentIndex()).toStdString());
 
+    // salvar consulta em arquivo
+//    saveConsultas();
 }
 
 void MainWindow::on_letExamesBtn_pressed()
@@ -350,10 +461,14 @@ void MainWindow::on_letExamesBtn_pressed()
         for(int i = 0; i<exame->size(); i++){
             Exame *aux = new Exame(exame->at(i));
             this->ui->resumoConsultaTxt->append("");
-            this->ui->resumoConsultaTxt->append("Exame: "+QString::number(aux->getId()));
+            this->ui->resumoConsultaTxt->append("Exame: "+ QString::number(aux->getId()));
+            this->ui->resumoConsultaTxt->append("Médico: " + QString::fromStdString(aux->getMedico()));
+            this->ui->resumoConsultaTxt->append("Endereço: " + QString::fromStdString(aux->getEndereco()));
+            this->ui->resumoConsultaTxt->append("Data: " + QString::fromStdString(aux->getData()));
+            this->ui->resumoConsultaTxt->append("Resultado: " + QString::fromStdString(aux->getResultado()));
+            this->ui->resumoConsultaTxt->append("Consultório: " + QString::fromStdString(consulta->getConsultorio()));
         }
     }
-
 }
 
 void MainWindow::on_testeBtn_pressed()

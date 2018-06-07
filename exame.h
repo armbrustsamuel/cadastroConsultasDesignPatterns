@@ -2,6 +2,7 @@
 #define EXAME_H
 
 #include<string>
+#include <QList>
 
 using namespace std;
 
@@ -15,6 +16,9 @@ private:
     string especialidade;
     string endereco;
     string resultado = "Pendente";
+    vector < class ObserverExame * > views;
+    int indexExame=0;
+
 
 public:
     Exame(){};
@@ -34,6 +38,26 @@ public:
     void setPaciente(const string &value);
     int getId() const;
     void setId(int value);
+
+    void attach(ObserverExame *obs);
+    void notify();
+
+    QList<string> *log = new QList<string>();
+    QList<string> *getLog() const;
+    void setLog(QList<string> *value);
+};
+
+class ObserverExame {
+    // 2. "dependent" functionality
+    Exame *model;
+
+public:
+    ObserverExame(){};
+    ObserverExame(Exame *mod);
+    virtual string * update() = 0;
+
+protected:
+    Exame *getExame();
 };
 
 #endif // EXAME_H
