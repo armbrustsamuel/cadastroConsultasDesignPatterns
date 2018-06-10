@@ -200,18 +200,11 @@
             <widget class="QTextEdit" name="pacientesTxt"/>
            </item>
            <item>
-            <widget class="QPushButton" name="testeBtn">
-             <property name="text">
-              <string>Atualizar Memória</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <layout class="QHBoxLayout" name="horizontalLayout_37">
              <item>
-              <widget class="QPushButton" name="historicoBtn">
+              <widget class="QPushButton" name="testeBtn">
                <property name="text">
-                <string>Histórico</string>
+                <string>Atualizar Memória</string>
                </property>
               </widget>
              </item>

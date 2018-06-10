@@ -9,7 +9,7 @@
 #include "pessoafactory.h"
 #include "novoexameobserver.h"
 #include "examefacade.h"
-#include "alerta.h"
+//#include "alerta.h"
 
 //remove (TEST)
 #include <iostream>

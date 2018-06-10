@@ -13,7 +13,7 @@
 #include "pessoafactory.cpp"
 #include "novoexameobserver.h"
 #include "examefacade.h"
-#include "alerta.h"
+//#include "alerta.h"
 
 #include <QByteArray>
 
@@ -72,7 +72,7 @@ private:
 
     void displayMedico();
     void displayPacientes();
-    void displayHistorico();
+//    void displayHistorico();
     void displayExame(Exame *exame);
 };
 

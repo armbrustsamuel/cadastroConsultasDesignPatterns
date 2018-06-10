@@ -215,33 +215,6 @@ void MainWindow::displayPacientes()
     }
 }
 
-void MainWindow::displayHistorico()
-{
-    if(pacienteList->size() > 1){
-        for(int i = 1; i<pacienteList->size(); i++){
-            string nomeAtual = this->ui->nomePessoaTxt->text().toStdString();
-            Paciente aux = new Paciente(this->pacienteList->at(i));
-            string test = aux.getNome();
-            if(nomeAtual == test){
-                aux.setHistorico(aux.mockHistory());
-                Historico *auxHistorico = aux.getHistorico();
-                if(auxHistorico->getList()->size() > 1){
-                    for(int i = 0; i<auxHistorico->getList()->size(); i++){
-                        Exame exame = auxHistorico->getList()->at(i);
-//                        this->ui->historicoTxt->append("");
-//                        this->ui->historicoTxt->append("Exame de " + QString::fromStdString(exame.getEspecialidade()));
-//                        this->ui->historicoTxt->append("Médico: " + QString::fromStdString(exame.getMedico()));
-//                        this->ui->historicoTxt->append("Paciente: " + QString::fromStdString(exame.getPaciente()));
-//                        this->ui->historicoTxt->append("Data: " + QString::fromStdString(exame.getData()));
-//                        this->ui->historicoTxt->append("Endereço: " + QString::fromStdString(exame.getEndereco()));
-//                        this->ui->historicoTxt->append("Resultado: " + QString::fromStdString(exame.getResultado()));
-                    }
-                }
-            }
-        }
-    }
-}
-
 void MainWindow::displayExame(Exame * exame)
 {
     this->ui->examesTxt->append("");
@@ -261,11 +234,6 @@ void MainWindow::on_adicionarExameBtn_pressed()
             if(exame->getId() == this->ui->exameConsultaCbox->itemText(this->ui->exameConsultaCbox->currentIndex()).toInt()){
 
                 this->ui->resumoConsultaTxt->append("Exame: "+QString::number(exame->getId()));
-
-//                ExameFacade exm;
-//                exm.proximaEtapa();
-//                while (!exm.verificarEstado());
-//                exame->setResultado("Pronto");
 
                 consulta->addExame(exame);
 
@@ -337,27 +305,6 @@ void MainWindow::carregarMedicos()
     test = 0;
 }
 
-//void MainWindow::carregarConsultas(){
-//    QFile g("/Users/samuel/Documents/Unisinos/Programacao_Orientada_Objeto_II/TGB/CadastroConsultas/consultas.bin");
-//    char BufferBytes[sizeof(Consulta)];
-//    Consulta * consulta = new Consulta();
-//    int test=0;
-
-//    if(g.open(QIODevice::ReadWrite)){
-//        while(!g.atEnd()){
-//            g.seek(test*(sizeof(Consulta)));
-//            g.read(BufferBytes, sizeof(Consulta));
-//            memcpy(consulta, BufferBytes, sizeof(Consulta));
-//            consultaList->insert(consultaIndex, *consulta);
-//            consultaIndex+=1;
-//            test++;
-//        }
-//        g.flush();
-//        g.close();
-//    }
-//    test = 0;
-//}
-
 void MainWindow::savePacientes()
 {
     QFile *f;
@@ -379,27 +326,6 @@ void MainWindow::savePacientes()
         }
     }
 }
-
-//void MainWindow::saveConsultas(){
-//    QFile *f;
-//    f = new QFile("/Users/samuel/Documents/Unisinos/Programacao_Orientada_Objeto_II/TGB/CadastroConsultas/consultas.bin");
-
-//    f->remove();
-
-//    if(consultaList->size() >= 1){
-//        for(int i = 0; i<consultaList->size(); i++){
-//            Consulta *aux = new Consulta(this->consultaList->at(i));
-//            if(f->open(QIODevice::WriteOnly | QIODevice::Append)){
-//                QDataStream ds (f);
-//                char BufferBytes[sizeof(Consulta)];
-//                std::memcpy(BufferBytes, aux, sizeof(Consulta));
-//                f->write(BufferBytes, sizeof(Consulta));
-//                f->flush();
-//                f->close();
-//            }
-//        }
-//    }
-//}
 
 void MainWindow::saveMedicos()
 {
